@@ -6,8 +6,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.lsmartin.barbearia_api.dto.UsuarioDTO;
+import br.com.lsmartin.barbearia_api.dto.UsuarioRepostaDTO;
 import br.com.lsmartin.barbearia_api.model.Usuario;
 import br.com.lsmartin.barbearia_api.services.UsuarioService;
 
@@ -24,11 +27,12 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/salvar")
-	public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario ){
+	@ResponseBody
+	public ResponseEntity<UsuarioRepostaDTO> salvar(@RequestBody UsuarioDTO dto ){
 		
-		Usuario user = usuarioService.salvar(usuario);
+		Usuario user = usuarioService.salvar(dto.transformaParObjeto());
 		
-		return new ResponseEntity<Usuario>(user, HttpStatus.CREATED);
+		return new ResponseEntity<>(UsuarioRepostaDTO.transformaEmDTO(user), HttpStatus.CREATED);
 	}
 
 }

@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-@SequenceGenerator(name = "seq_usuario", sequenceName = "seq_usuario", initialValue = 1 ,allocationSize = 1 )
+@SequenceGenerator(name = "seq_usuario", sequenceName = "seq_usuario", initialValue = 1, allocationSize = 1)
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -18,18 +18,31 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_usuario")
 	private Long id;
-	
-	@Column( nullable = false)
+
+	@Column(nullable = false)
 	private String nome;
-	
-	@Column( nullable = false)
+
+	@Column(nullable = false)
 	private String login;
-	
-	@Column( nullable = false)
+
+	@Column(nullable = false)
 	private String senha;
-	
-	@Column( nullable = false)
+
+	@Column(nullable = false)
 	private Boolean isAdmin = false;
+
+	public Usuario() {
+
+	}
+
+	public Usuario(String nome, String login, String senha) {
+		
+		this.nome = nome;
+		this.login = login;
+		this.senha = senha;
+		
+		
+	}
 
 	public Long getId() {
 		return id;
@@ -70,9 +83,5 @@ public class Usuario implements Serializable {
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-	
-	
-	
-	
 
 }
